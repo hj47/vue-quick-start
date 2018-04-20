@@ -28,6 +28,7 @@ import Home from './components/Home'
 import Contacts from './components/Contacts'
 import ContactByNo from './components/ContactByNo'
 import About from './components/About'
+import NotFound from './components/NotFound'
 import VueRouter from 'vue-router'
 
 const router = new VueRouter({
@@ -39,9 +40,23 @@ const router = new VueRouter({
     { 
       path:'/contacts', name:'contacts', component: Contacts,
       children : [
-        { path:':no', name:'contactbyno', component: ContactByNo }
+        { 
+          path:':no', name:'contactbyno', component: ContactByNo, 
+          props: function connect(route) {
+            return { no:route.params.no, path: route.path }
+          },
+          beforeEnter: (to, from, next) => {
+            if(from.path.startsWith("/contacts")){
+              next()
+            } else {
+              console.log(from.path);
+              next(false)    
+            }
+          } 
+        }
       ]
-    }
+    },
+    { path:"*", component:NotFound }
   ]
 })
 

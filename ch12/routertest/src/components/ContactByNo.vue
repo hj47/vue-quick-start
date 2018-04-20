@@ -30,15 +30,16 @@
 import contactlist from '../ContactList';
 export default {
     name : 'contactbyno',
+    props : ['no', 'path'],
     data : function() {
         return {
-            no : 0,
+            // no : 0,
             contacts : contactlist.contacts
         }
     },
-    created : function() {
-        this.no = this.$route.params.no;
-    },
+    // created : function() {
+    //     this.no = this.$route.params.no;
+    // },
     computed : {
       contact : function() {
         var no = this.no;
@@ -49,11 +50,15 @@ export default {
         else return {};
       }
     },
-    watch : {
-      '$route' : function(to, from) {
-        this.no = to.params.no
-      }
-    }
+    // beforeRouteUpdate (to,from,next) {
+    //   this.no = to.params.no
+    //   next()
+    // }
+    // watch : {
+    //   '$route' : function(to, from) {
+    //     this.no = to.params.no
+    //   }
+    // }
 }
 </script>
 
