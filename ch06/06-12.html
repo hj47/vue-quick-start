@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>06-12</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<template id="listTemplate">
+    <li>{{myMessage}}</li>
+</template>
+<script type="text/javascript">
+    Vue.component("list-component", {
+        template : "#listTemplate",
+        props : {
+            myMessage : { type : String, default : "Hi" },
+            count : { type : Number, required : true },
+            countries : {
+                type : Array,
+                default : function () {
+                    return ["Korea"]
+                }
+            }
+        }
+    })
+</script>
+<body>
+<div id="app">
+    <list-component my-message="Hello" :count="100" :countries="['usa','china']"></list-component>
+    <list-component my-message="good morning" :count="0" :countries="['india','philipine']"></list-component>
+    <list-component :count="99"></list-component>
+</div>
+</body>
+<script type="text/javascript">
+
+var vm = new Vue({
+    el : "#app"
+})
+</script>
+</html>
